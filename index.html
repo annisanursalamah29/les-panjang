@@ -1,0 +1,3204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ukur panjang</title>
+  <style>
+* {
+  box-sizing: border-box;
+  }
+  
+body {
+  margin: 0;
+  display: grid;
+}
+
+.bar {
+  display: grid;
+  top: 0;
+  z-index: 1;
+  height: 8px;
+  animation: mybar 15s infinite;
+  animation-play-state: paused;
+  width: 100%;
+  position: fixed;
+  display: grid;
+}
+
+p {
+  text-align: center;
+  font-size: 20px;
+  font-style: kristen itc;
+}
+
+.btn1 {
+  border: 3px solid purple;
+  background-color: white;
+  color: darkgreen;
+  font-size: 15px;
+  cursor: pointer;
+  float: left;
+  width: 47px;
+  border-radius: 12px;
+}
+
+.btn1:hover {
+  background: purple;
+  color: white;
+}
+
+.angka {
+  height: 60vh;
+  float: left;
+  position: fixed;
+  width: 100%;
+  margin: 40px 10px 0;
+}
+
+h1 {
+  color: purple;
+  font-size: 49px;
+  height: 30px;
+  text-align: center;
+}
+
+.menu2, .menu1 {
+  text-align: center;
+  height: 10vh;
+  width: 100%; 
+  position: fixed;
+}
+
+.off {
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  color: red;
+  border-radius: 50%;
+  margin: 5vh 2vh 0;
+  border: 3px solid red;
+  opacity: 0;
+  position: absolute;
+}
+
+.off:hover{
+  background-color: red;
+  color: white;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+}
+
+.menu2 {
+  margin-top: 66vh;
+}
+
+.tombol2 {position: absolute;}
+
+.btn2 {
+  width: 56px;
+  border: 1px solid;
+  border-radius: 12px;
+  background-color: white;
+  color:
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+  display: none;
+}
+
+.btn2:hover {
+  background: purple;
+}
+
+@keyframes mymove {
+  from {top: 0px;}
+  to {top: -400cm;}
+}
+
+@keyframes mybar {
+  from {
+  left: -100%;
+  background-color: blue;
+  }
+  to {
+  left: 0%;
+  background-color: red;
+  }
+}
+  </style>
+
+</head>
+
+<body>
+  <div id="bar" class="bar"></div>
+
+  <audio id="myaudio" src="Asia.mp3"></audio>
+
+  <div class="kolom1">
+    <p>UKUR  PANANG</p>
+    <div class="angka">
+      <table>
+        <tr>
+          <td><h1 class="teks" id="angka1"></h1></td>
+          <td><h1 class="teks" id="satuan1"></h1></td>
+        </tr>
+        <tr>
+          <td><h1 id="simbol">=</h1></td>
+        </tr>
+        <tr>
+          <td><h1 id="jml"></h1></td>
+          <td><h1 id="satuan2"></h1></td>
+        </tr>
+      </table>
+    </div>
+  
+    <div class="menu1" id="menu1">
+      <table>
+        <tr>
+          <td><button class="btn1" onclick="mykm()">km</button></td>
+          <td><button class="btn1" onclick="myhm()">hm</button></td>
+          <td><button class="btn1" onclick="mydam()">dam</button></td>
+          <td><button class="btn1" onclick="mym()">m</button></td>
+          <td><button class="btn1" onclick="mydm()">dm</button></td>
+          <td><button class="btn1" onclick="mycm()">cm</button></td>
+          <td><button class="btn1" onclick="mymm()">mm</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <div class="kolom2">
+    <div class="menu2">
+      <table class="tombol2">
+        <tr>
+          <td><button id="kmhm" class="btn2"  onclick="mykmhm()">km-hm</button></td>
+          <td><button id="kmdam" class="btn2" onclick="mykmdam()">km-dam</button></td>
+          <td><button id="kmm" class="btn2" onclick="mykmm()">km - m</button></td>
+          <td><button id="kmdm" class="btn2" onclick="mykmdm()">km-dm</button></td>
+          <td><button id="kmcm" class="btn2" onclick="mykmcm()">km-cm</button></td>
+          <td><button id="kmmm" class="btn2" onclick="mykmmm()">km-mm</button></td>
+        </tr>
+      </table>
+      
+      <table class="tombol2">
+        <tr>
+          <td><button id="hmkm" class="btn2" onclick="myhmkm()">hm-km</button></td>
+          <td><button id="hmdam" class="btn2" onclick="myhmdam()">hm-dam</button></td>
+          <td><button id="hmm" class="btn2" onclick="myhmm()">hm - m</button></td>
+          <td><button id="hmdm" class="btn2" onclick="myhmdm()">hm-dm</button></td>
+          <td><button id="hmcm" class="btn2" onclick="myhmcm()">hm-cm</button></td>
+          <td><button id="hmmm" class="btn2" onclick="myhmmm()">hm-mm</button></td>
+        </tr>
+      </table>
+
+      <table class="tombol2">
+        <tr>
+          <td><button id="damkm" class="btn2" onclick="mydamkm()">dam-km</button></td>
+          <td><button id="damhm" class="btn2" onclick="mydamhm()">dam-hm</button></td>
+          <td><button id="damm" class="btn2" onclick="mydamm()">dam - m</button></td>
+          <td><button id="damdm" class="btn2" onclick="mydamdm()">dam-dm</button></td>
+          <td><button id="damcm" class="btn2" onclick="mydamcm()">dam-cm</button></td>
+          <td><button id="dammm" class="btn2" onclick="mydammm()">dam-mm</button></td>
+        </tr>
+      </table>
+      
+      <table class="tombol2">
+        <tr>
+          <td><button id="mkm" class="btn2" onclick="mymkm()">m - km</button></td>
+          <td><button id="mhm" class="btn2" onclick="mymhm()">m - hm</button></td>
+          <td><button id="mdam" class="btn2" onclick="mymdam()">m -dam</button></td>
+          <td><button id="mdm" class="btn2" onclick="mymdm()">m - dm</button></td>
+          <td><button id="mcm" class="btn2" onclick="mymcm()">m - cm</button></td>
+          <td><button id="mml" class="btn2" onclick="mymml()">m - mm</button></td>
+        </tr>
+      </table>
+      
+      <table class="tombol2">
+        <tr>
+          <td><button id="dmkm" class="btn2" onclick="mydmkm()">dm-km</button></td>
+          <td><button id="dmhm" class="btn2" onclick="mydmhm()">dm-hm</button></td>
+          <td><button id="dmdam" class="btn2" onclick="mydmdam()">dm -dam</button></td>
+          <td><button id="dmm" class="btn2" onclick="mydmm()">dm - m</button></td>
+          <td><button id="dmcm" class="btn2" onclick="mydmcm()">dm-cm</button></td>
+          <td><button id="dmmm" class="btn2" onclick="mydmmm()">dm-mm</button></td>
+        </tr>
+      </table>
+      
+      <table class="tombol2">
+        <tr>
+          <td><button id="cmkm" class="btn2" onclick="mycmkm()">cm-km</button></td>
+          <td><button id="cmhm" class="btn2" onclick="mycmhm()">cm-hm</button></td>
+          <td><button id="cmdam" class="btn2" onclick="mycmdam()">cm -dam</button></td>
+          <td><button id="cmm" class="btn2" onclick="mycmm()">cm - m</button></td>
+          <td><button id="cmdm" class="btn2" onclick="mycmdm()">cm-dm</button></td>
+          <td><button id="cmmm" class="btn2" onclick="mycmmm()">cm-mm</button></td>
+        </tr>
+      </table>
+      
+      <table class="tombol2">
+        <tr>
+          <td><button id="mmkm" class="btn2" onclick="mymmkm()">mm-km</button></td>
+          <td><button id="mmhm" class="btn2" onclick="mymmhm()">mm-hm</button></td>
+          <td><button id="mmdam" class="btn2" onclick="mymmdam()">mm-dam</button></td>
+          <td><button id="mmm" class="btn2" onclick="mymmm()">mm- m</button></td>
+          <td><button id="mmdm" class="btn2" onclick="mymmdm()">mm-dm</button></td>
+          <td><button id="mmcm" class="btn2" onclick="mymmcm()">mm-cm</button></td>
+        </tr>
+      </table>
+
+      <br><br>
+      <button class="off" id="off" onclick="myPausekmhm()">OFF</button>
+    </div>
+  </div>
+  
+  <script>
+    var mus = document.getElementById("myaudio");
+    
+    function mykm() {
+      var kmhm = document.getElementById("kmhm");
+      var kmdam = document.getElementById("kmdam");
+      var kmm = document.getElementById("kmm");
+      var kmdm = document.getElementById("kmdm");
+      var kmcm = document.getElementById("kmcm");
+      var kmmm = document.getElementById("kmmm");
+      
+      if (kmhm.style.display === "none") {
+        kmhm.style.display = "block";
+      } else {
+        kmhm.style.display = "block";
+      }
+      
+      if (kmdam.style.display === "none") {
+        kmdam.style.display = "block";
+      } else {
+        kmdam.style.display = "block";
+      }
+      
+      if (kmm.style.display === "none") {
+        kmm.style.display = "block";
+      } else {
+        kmm.style.display = "block";
+      }
+      
+      if (kmdm.style.display === "none") {
+        kmdm.style.display = "block";
+      } else {
+        kmdm.style.display = "block";
+      }
+      
+      if (kmcm.style.display === "none") {
+        kmcm.style.display = "block";
+      } else {
+        kmcm.style.display = "block";
+      }
+      
+      if (kmmm.style.display === "none") {
+        kmmm.style.display = "block";
+      } else {
+        kmmm.style.display = "block";
+      }
+      
+      var hmkm = document.getElementById("hmkm");
+      var hmdam = document.getElementById("hmdam");
+      var hmm = document.getElementById("hmm");
+      var hmdm = document.getElementById("hmdm");
+      var hmcm = document.getElementById("hmcm");
+      var hmmm = document.getElementById("hmmm");
+      
+      if (hmkm.style.display === "none") {
+        hmkm.style.display = "none";
+      } else {
+        hmkm.style.display = "none";
+      }
+      
+      if (hmdam.style.display === "none") {
+        hmdam.style.display = "none";
+      } else {
+        hmdam.style.display = "none";
+      }
+      
+      if (hmm.style.display === "none") {
+        hmm.style.display = "none";
+      } else {
+        hmm.style.display = "none";
+      }
+      
+      if (hmdm.style.display === "none") {
+        hmdm.style.display = "none";
+      } else {
+        hmdm.style.display = "none";
+      }
+      
+      if (hmcm.style.display === "none") {
+        hmcm.style.display = "none";
+      } else {
+        hmcm.style.display = "none";
+      }
+      
+      if (hmmm.style.display === "none") {
+        hmmm.style.display = "none";
+      } else {
+        hmmm.style.display = "none";
+      }
+      
+      var damkm = document.getElementById("damkm");
+      var damhm = document.getElementById("damhm");
+      var damm = document.getElementById("damm");
+      var damdm = document.getElementById("damdm");
+      var damcm = document.getElementById("damcm");
+      var dammm = document.getElementById("dammm");
+      
+      if (damkm.style.display === "none") {
+        damkm.style.display = "none";
+      } else {
+        damkm.style.display = "none";
+      }
+      
+      if (damhm.style.display === "none") {
+        damhm.style.display = "none";
+      } else {
+        damhm.style.display = "none";
+      }
+      
+      if (damm.style.display === "none") {
+        damm.style.display = "none";
+      } else {
+        damm.style.display = "none";
+      }
+      
+      if (damdm.style.display === "none") {
+        damdm.style.display = "none";
+      } else {
+        damdm.style.display = "none";
+      }
+      
+      if (damcm.style.display === "none") {
+        damcm.style.display = "none";
+      } else {
+        damcm.style.display = "none";
+      }
+      
+      if (dammm.style.display === "none") {
+        dammm.style.display = "none";
+      } else {
+        dammm.style.display = "none";
+      }
+      
+      var mkm = document.getElementById("mkm");
+      var mhm = document.getElementById("mhm");
+      var mdam = document.getElementById("mdam");
+      var mdm = document.getElementById("mdm");
+      var mcm = document.getElementById("mcm");
+      var mml = document.getElementById("mml");
+      
+      if (mkm.style.display === "none") {
+        mkm.style.display = "none";
+      } else {
+        mkm.style.display = "none";
+      }
+      
+      if (mhm.style.display === "none") {
+        mhm.style.display = "none";
+      } else {
+        mhm.style.display = "none";
+      }
+      
+      if (mdam.style.display === "none") {
+        mdam.style.display = "none";
+      } else {
+        mdam.style.display = "none";
+      }
+      
+      if (mdm.style.display === "none") {
+        mdm.style.display = "none";
+      } else {
+        mdm.style.display = "none";
+      }
+      
+      if (mcm.style.display === "none") {
+        mcm.style.display = "none";
+      } else {
+        mcm.style.display = "none";
+      }
+      
+      if (mml.style.display === "none") {
+        mml.style.display = "none";
+      } else {
+        mml.style.display = "none";
+      }
+      
+      var dmkm = document.getElementById("dmkm");
+      var dmhm = document.getElementById("dmhm");
+      var dmdam = document.getElementById("dmdam");
+      var dmm = document.getElementById("dmm");
+      var dmcm = document.getElementById("dmcm");
+      var dmmm = document.getElementById("dmmm");
+      
+      if (dmkm.style.display === "none") {
+        dmkm.style.display = "none";
+      } else {
+        dmkm.style.display = "none";
+      }
+      
+      if (dmhm.style.display === "none") {
+        dmhm.style.display = "none";
+      } else {
+        dmhm.style.display = "none";
+      }
+      
+      if (dmdam.style.display === "none") {
+        dmdam.style.display = "none";
+      } else {
+        dmdam.style.display = "none";
+      }
+      
+      if (dmm.style.display === "none") {
+        dmm.style.display = "none";
+      } else {
+        dmm.style.display = "none";
+      }
+      
+      if (dmcm.style.display === "none") {
+        dmcm.style.display = "none";
+      } else {
+        dmcm.style.display = "none";
+      }
+      
+      if (dmmm.style.display === "none") {
+        dmmm.style.display = "none";
+      } else {
+        dmmm.style.display = "none";
+      }
+      
+      var cmkm = document.getElementById("cmkm");
+      var cmhm = document.getElementById("cmhm");
+      var cmdam = document.getElementById("cmdam");
+      var cmdm = document.getElementById("cmdm");
+      var cmm = document.getElementById("cmm");
+      var cmmm = document.getElementById("cmmm");
+      
+      if (cmkm.style.display === "none") {
+        cmkm.style.display = "none";
+      } else {
+        cmkm.style.display = "none";
+      }
+      
+      if (cmhm.style.display === "none") {
+        cmhm.style.display = "none";
+      } else {
+        cmhm.style.display = "none";
+      }
+      
+      if (cmdam.style.display === "none") {
+        cmdam.style.display = "none";
+      } else {
+        cmdam.style.display = "none";
+      }
+      
+      if (cmdm.style.display === "none") {
+        cmdm.style.display = "none";
+      } else {
+        cmdm.style.display = "none";
+      }
+      
+      if (cmm.style.display === "none") {
+        cmm.style.display = "none";
+      } else {
+        cmm.style.display = "none";
+      }
+      
+      if (cmmm.style.display === "none") {
+        cmmm.style.display = "none";
+      } else {
+        cmmm.style.display = "none";
+      }
+      
+      var mmkm = document.getElementById("mmkm");
+      var mmhm = document.getElementById("mmhm");
+      var mmdam = document.getElementById("mmdam");
+      var mmdm = document.getElementById("mmdm");
+      var mmcm = document.getElementById("mmcm");
+      var mmm = document.getElementById("mmm");
+      
+      if (mmkm.style.display === "none") {
+        mmkm.style.display = "none";
+      } else {
+        mmkm.style.display = "none";
+      }
+      
+      if (mmhm.style.display === "none") {
+        mmhm.style.display = "none";
+      } else {
+        mmhm.style.display = "none";
+      }
+      
+      if (mmdam.style.display === "none") {
+        mmdam.style.display = "none";
+      } else {
+        mmdam.style.display = "none";
+      }
+      
+      if (mmdm.style.display === "none") {
+        mmdm.style.display = "none";
+      } else {
+        mmdm.style.display = "none";
+      }
+      
+      if (mmcm.style.display === "none") {
+        mmcm.style.display = "none";
+      } else {
+        mmcm.style.display = "none";
+      }
+      
+      if (mmm.style.display === "none") {
+        mmm.style.display = "none";
+      } else {
+        mmm.style.display = "none";
+      }
+      
+      document.getElementById('kmhm').style.color = "purple";
+      document.getElementById('kmdam').style.color = "purple";
+      document.getElementById('kmm').style.color = "purple";
+      document.getElementById('kmdm').style.color = "purple";
+      document.getElementById('kmcm').style.color = "purple";
+      document.getElementById('kmmm').style.color = "purple";
+    } 
+    
+    function mykmhm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x * 10;
+      
+      document.getElementById('satuan1').innerHTML = "km";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'hm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mykmdam() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let dua = x * 100;
+      
+      document.getElementById('satuan1').innerHTML = "km";
+      document.getElementById('jml').innerHTML = dua;
+      document.getElementById('satuan2').innerHTML = 'dam';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mykmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let tiga = x * 1000;
+      
+      document.getElementById('satuan1').innerHTML = "km";
+      document.getElementById('jml').innerHTML = tiga;
+      document.getElementById('satuan2').innerHTML = 'm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mykmdm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let empat = x * 10000;
+      
+      document.getElementById('satuan1').innerHTML = "km";
+      document.getElementById('jml').innerHTML = empat;
+      document.getElementById('satuan2').innerHTML = 'dm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mykmcm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let lima = x * 100000;
+      
+      document.getElementById('satuan1').innerHTML = "km";
+      document.getElementById('jml').innerHTML = lima;
+      document.getElementById('satuan2').innerHTML = 'cm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mykmmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let enam = x * 1000000;
+      
+      document.getElementById('satuan1').innerHTML = "km";
+      document.getElementById('jml').innerHTML = enam;
+      document.getElementById('satuan2').innerHTML = 'mm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+
+
+    function myhm() {
+      var kmhm = document.getElementById("kmhm");
+      var kmdam = document.getElementById("kmdam");
+      var kmm = document.getElementById("kmm");
+      var kmdm = document.getElementById("kmdm");
+      var kmcm = document.getElementById("kmcm");
+      var kmmm = document.getElementById("kmmm");
+      
+      if (kmhm.style.display === "none") {
+        kmhm.style.display = "none";
+      } else {
+        kmhm.style.display = "none";
+      }
+      
+      if (kmdam.style.display === "none") {
+        kmdam.style.display = "none";
+      } else {
+        kmdam.style.display = "none";
+      }
+      
+      if (kmm.style.display === "none") {
+        kmm.style.display = "none";
+      } else {
+        kmm.style.display = "none";
+      }
+      
+      if (kmdm.style.display === "none") {
+        kmdm.style.display = "none";
+      } else {
+        kmdm.style.display = "none";
+      }
+      
+      if (kmcm.style.display === "none") {
+        kmcm.style.display = "none";
+      } else {
+        kmcm.style.display = "none";
+      }
+      
+      if (kmmm.style.display === "none") {
+        kmmm.style.display = "none";
+      } else {
+        kmmm.style.display = "none";
+      }
+      
+      var hmkm = document.getElementById("hmkm");
+      var hmdam = document.getElementById("hmdam");
+      var hmm = document.getElementById("hmm");
+      var hmdm = document.getElementById("hmdm");
+      var hmcm = document.getElementById("hmcm");
+      var hmmm = document.getElementById("hmmm");
+      
+      if (hmkm.style.display === "none") {
+        hmkm.style.display = "block";
+      } else {
+        hmkm.style.display = "block";
+      }
+      
+      if (hmdam.style.display === "none") {
+        hmdam.style.display = "block";
+      } else {
+        hmdam.style.display = "block";
+      }
+      
+      if (hmm.style.display === "none") {
+        hmm.style.display = "block";
+      } else {
+        hmm.style.display = "block";
+      }
+      
+      if (hmdm.style.display === "none") {
+        hmdm.style.display = "block";
+      } else {
+        hmdm.style.display = "block";
+      }
+      
+      if (hmcm.style.display === "none") {
+        hmcm.style.display = "block";
+      } else {
+        hmcm.style.display = "block";
+      }
+      
+      if (hmmm.style.display === "none") {
+        hmmm.style.display = "block";
+      } else {
+        hmmm.style.display = "block";
+      }
+      
+      var damkm = document.getElementById("damkm");
+      var damhm = document.getElementById("damhm");
+      var damm = document.getElementById("damm");
+      var damdm = document.getElementById("damdm");
+      var damcm = document.getElementById("damcm");
+      var dammm = document.getElementById("dammm");
+      
+      if (damkm.style.display === "none") {
+        damkm.style.display = "none";
+      } else {
+        damkm.style.display = "none";
+      }
+      
+      if (damhm.style.display === "none") {
+        damhm.style.display = "none";
+      } else {
+        damhm.style.display = "none";
+      }
+      
+      if (damm.style.display === "none") {
+        damm.style.display = "none";
+      } else {
+        damm.style.display = "none";
+      }
+      
+      if (damdm.style.display === "none") {
+        damdm.style.display = "none";
+      } else {
+        damdm.style.display = "none";
+      }
+      
+      if (damcm.style.display === "none") {
+        damcm.style.display = "none";
+      } else {
+        damcm.style.display = "none";
+      }
+      
+      if (dammm.style.display === "none") {
+        dammm.style.display = "none";
+      } else {
+        dammm.style.display = "none";
+      }
+      
+      var mkm = document.getElementById("mkm");
+      var mhm = document.getElementById("mhm");
+      var mdam = document.getElementById("mdam");
+      var mdm = document.getElementById("mdm");
+      var mcm = document.getElementById("mcm");
+      var mml = document.getElementById("mml");
+      
+      if (mkm.style.display === "none") {
+        mkm.style.display = "none";
+      } else {
+        mkm.style.display = "none";
+      }
+      
+      if (mhm.style.display === "none") {
+        mhm.style.display = "none";
+      } else {
+        mhm.style.display = "none";
+      }
+      
+      if (mdam.style.display === "none") {
+        mdam.style.display = "none";
+      } else {
+        mdam.style.display = "none";
+      }
+      
+      if (mdm.style.display === "none") {
+        mdm.style.display = "none";
+      } else {
+        mdm.style.display = "none";
+      }
+      
+      if (mcm.style.display === "none") {
+        mcm.style.display = "none";
+      } else {
+        mcm.style.display = "none";
+      }
+      
+      if (mml.style.display === "none") {
+        mml.style.display = "none";
+      } else {
+        mml.style.display = "none";
+      }
+      
+      var dmkm = document.getElementById("dmkm");
+      var dmhm = document.getElementById("dmhm");
+      var dmdam = document.getElementById("dmdam");
+      var dmm = document.getElementById("dmm");
+      var dmcm = document.getElementById("dmcm");
+      var dmmm = document.getElementById("dmmm");
+      
+      if (dmkm.style.display === "none") {
+        dmkm.style.display = "none";
+      } else {
+        dmkm.style.display = "none";
+      }
+      
+      if (dmhm.style.display === "none") {
+        dmhm.style.display = "none";
+      } else {
+        dmhm.style.display = "none";
+      }
+      
+      if (dmdam.style.display === "none") {
+        dmdam.style.display = "none";
+      } else {
+        dmdam.style.display = "none";
+      }
+      
+      if (dmm.style.display === "none") {
+        dmm.style.display = "none";
+      } else {
+        dmm.style.display = "none";
+      }
+      
+      if (dmcm.style.display === "none") {
+        dmcm.style.display = "none";
+      } else {
+        dmcm.style.display = "none";
+      }
+      
+      if (dmmm.style.display === "none") {
+        dmmm.style.display = "none";
+      } else {
+        dmmm.style.display = "none";
+      }
+      
+      var cmkm = document.getElementById("cmkm");
+      var cmhm = document.getElementById("cmhm");
+      var cmdam = document.getElementById("cmdam");
+      var cmdm = document.getElementById("cmdm");
+      var cmm = document.getElementById("cmm");
+      var cmmm = document.getElementById("cmmm");
+      
+      if (cmkm.style.display === "none") {
+        cmkm.style.display = "none";
+      } else {
+        cmkm.style.display = "none";
+      }
+      
+      if (cmhm.style.display === "none") {
+        cmhm.style.display = "none";
+      } else {
+        cmhm.style.display = "none";
+      }
+      
+      if (cmdam.style.display === "none") {
+        cmdam.style.display = "none";
+      } else {
+        cmdam.style.display = "none";
+      }
+      
+      if (cmdm.style.display === "none") {
+        cmdm.style.display = "none";
+      } else {
+        cmdm.style.display = "none";
+      }
+      
+      if (cmm.style.display === "none") {
+        cmm.style.display = "none";
+      } else {
+        cmm.style.display = "none";
+      }
+      
+      if (cmmm.style.display === "none") {
+        cmmm.style.display = "none";
+      } else {
+        cmmm.style.display = "none";
+      }
+      
+      var mmkm = document.getElementById("mmkm");
+      var mmhm = document.getElementById("mmhm");
+      var mmdam = document.getElementById("mmdam");
+      var mmdm = document.getElementById("mmdm");
+      var mmcm = document.getElementById("mmcm");
+      var mmm = document.getElementById("mmm");
+      
+      if (mmkm.style.display === "none") {
+        mmkm.style.display = "none";
+      } else {
+        mmkm.style.display = "none";
+      }
+      
+      if (mmhm.style.display === "none") {
+        mmhm.style.display = "none";
+      } else {
+        mmhm.style.display = "none";
+      }
+      
+      if (mmdam.style.display === "none") {
+        mmdam.style.display = "none";
+      } else {
+        mmdam.style.display = "none";
+      }
+      
+      if (mmdm.style.display === "none") {
+        mmdm.style.display = "none";
+      } else {
+        mmdm.style.display = "none";
+      }
+      
+      if (mmcm.style.display === "none") {
+        mmcm.style.display = "none";
+      } else {
+        mmcm.style.display = "none";
+      }
+      
+      if (mmm.style.display === "none") {
+        mmm.style.display = "none";
+      } else {
+        mmm.style.display = "none";
+      }
+      
+      document.getElementById('hmkm').style.color = "purple";
+      document.getElementById('hmdam').style.color = "purple";
+      document.getElementById('hmm').style.color = "purple";
+      document.getElementById('hmdm').style.color = "purple";
+      document.getElementById('hmcm').style.color = "purple";
+      document.getElementById('hmmm').style.color = "purple";
+    } 
+    
+    function myhmkm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 10;
+      
+      document.getElementById('satuan1').innerHTML = "hm";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'km';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function myhmdam() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x * 10;
+      
+      document.getElementById('satuan1').innerHTML = "hm";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function myhmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let dua = x * 100;
+      
+      document.getElementById('satuan1').innerHTML = "hm";
+      document.getElementById('jml').innerHTML = dua;
+      document.getElementById('satuan2').innerHTML = 'm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function myhmdm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let tiga = x * 1000;
+      
+      document.getElementById('satuan1').innerHTML = "hm";
+      document.getElementById('jml').innerHTML = tiga;
+      document.getElementById('satuan2').innerHTML = 'dm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function myhmcm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let empat = x * 10000;
+      
+      document.getElementById('satuan1').innerHTML = "hm";
+      document.getElementById('jml').innerHTML = empat;
+      document.getElementById('satuan2').innerHTML = 'cm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function myhmmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let lima = x * 100000;
+      
+      document.getElementById('satuan1').innerHTML = "hm";
+      document.getElementById('jml').innerHTML = lima;
+      document.getElementById('satuan2').innerHTML = 'mm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+
+
+    function mydam() {
+      var kmhm = document.getElementById("kmhm");
+      var kmdam = document.getElementById("kmdam");
+      var kmm = document.getElementById("kmm");
+      var kmdm = document.getElementById("kmdm");
+      var kmcm = document.getElementById("kmcm");
+      var kmmm = document.getElementById("kmmm");
+      
+      if (kmhm.style.display === "none") {
+        kmhm.style.display = "none";
+      } else {
+        kmhm.style.display = "none";
+      }
+      
+      if (kmdam.style.display === "none") {
+        kmdam.style.display = "none";
+      } else {
+        kmdam.style.display = "none";
+      }
+      
+      if (kmm.style.display === "none") {
+        kmm.style.display = "none";
+      } else {
+        kmm.style.display = "none";
+      }
+      
+      if (kmdm.style.display === "none") {
+        kmdm.style.display = "none";
+      } else {
+        kmdm.style.display = "none";
+      }
+      
+      if (kmcm.style.display === "none") {
+        kmcm.style.display = "none";
+      } else {
+        kmcm.style.display = "none";
+      }
+      
+      if (kmmm.style.display === "none") {
+        kmmm.style.display = "none";
+      } else {
+        kmmm.style.display = "none";
+      }
+      
+      var hmkm = document.getElementById("hmkm");
+      var hmdam = document.getElementById("hmdam");
+      var hmm = document.getElementById("hmm");
+      var hmdm = document.getElementById("hmdm");
+      var hmcm = document.getElementById("hmcm");
+      var hmmm = document.getElementById("hmmm");
+      
+      if (hmkm.style.display === "none") {
+        hmkm.style.display = "none";
+      } else {
+        hmkm.style.display = "none";
+      }
+      
+      if (hmdam.style.display === "none") {
+        hmdam.style.display = "none";
+      } else {
+        hmdam.style.display = "none";
+      }
+      
+      if (hmm.style.display === "none") {
+        hmm.style.display = "none";
+      } else {
+        hmm.style.display = "none";
+      }
+      
+      if (hmdm.style.display === "none") {
+        hmdm.style.display = "none";
+      } else {
+        hmdm.style.display = "none";
+      }
+      
+      if (hmcm.style.display === "none") {
+        hmcm.style.display = "none";
+      } else {
+        hmcm.style.display = "none";
+      }
+      
+      if (hmmm.style.display === "none") {
+        hmmm.style.display = "none";
+      } else {
+        hmmm.style.display = "none";
+      }
+      
+      var damkm = document.getElementById("damkm");
+      var damhm = document.getElementById("damhm");
+      var damm = document.getElementById("damm");
+      var damdm = document.getElementById("damdm");
+      var damcm = document.getElementById("damcm");
+      var dammm = document.getElementById("dammm");
+      
+      if (damkm.style.display === "none") {
+        damkm.style.display = "block";
+      } else {
+        damkm.style.display = "block";
+      }
+      
+      if (damhm.style.display === "none") {
+        damhm.style.display = "block";
+      } else {
+        damhm.style.display = "block";
+      }
+      
+      if (damm.style.display === "none") {
+        damm.style.display = "block";
+      } else {
+        damm.style.display = "block";
+      }
+      
+      if (damdm.style.display === "none") {
+        damdm.style.display = "block";
+      } else {
+        damdm.style.display = "block";
+      }
+      
+      if (damcm.style.display === "none") {
+        damcm.style.display = "block";
+      } else {
+        damcm.style.display = "block";
+      }
+      
+      if (dammm.style.display === "none") {
+        dammm.style.display = "block";
+      } else {
+        dammm.style.display = "block";
+      }
+      
+      var mkm = document.getElementById("mkm");
+      var mhm = document.getElementById("mhm");
+      var mdam = document.getElementById("mdam");
+      var mdm = document.getElementById("mdm");
+      var mcm = document.getElementById("mcm");
+      var mml = document.getElementById("mml");
+      
+      if (mkm.style.display === "none") {
+        mkm.style.display = "none";
+      } else {
+        mkm.style.display = "none";
+      }
+      
+      if (mhm.style.display === "none") {
+        mhm.style.display = "none";
+      } else {
+        mhm.style.display = "none";
+      }
+      
+      if (mdam.style.display === "none") {
+        mdam.style.display = "none";
+      } else {
+        mdam.style.display = "none";
+      }
+      
+      if (mdm.style.display === "none") {
+        mdm.style.display = "none";
+      } else {
+        mdm.style.display = "none";
+      }
+      
+      if (mcm.style.display === "none") {
+        mcm.style.display = "none";
+      } else {
+        mcm.style.display = "none";
+      }
+      
+      if (mml.style.display === "none") {
+        mml.style.display = "none";
+      } else {
+        mml.style.display = "none";
+      }
+      
+      var dmkm = document.getElementById("dmkm");
+      var dmhm = document.getElementById("dmhm");
+      var dmdam = document.getElementById("dmdam");
+      var dmm = document.getElementById("dmm");
+      var dmcm = document.getElementById("dmcm");
+      var dmmm = document.getElementById("dmmm");
+      
+      if (dmkm.style.display === "none") {
+        dmkm.style.display = "none";
+      } else {
+        dmkm.style.display = "none";
+      }
+      
+      if (dmhm.style.display === "none") {
+        dmhm.style.display = "none";
+      } else {
+        dmhm.style.display = "none";
+      }
+      
+      if (dmdam.style.display === "none") {
+        dmdam.style.display = "none";
+      } else {
+        dmdam.style.display = "none";
+      }
+      
+      if (dmm.style.display === "none") {
+        dmm.style.display = "none";
+      } else {
+        dmm.style.display = "none";
+      }
+      
+      if (dmcm.style.display === "none") {
+        dmcm.style.display = "none";
+      } else {
+        dmcm.style.display = "none";
+      }
+      
+      if (dmmm.style.display === "none") {
+        dmmm.style.display = "none";
+      } else {
+        dmmm.style.display = "none";
+      }
+      
+      var cmkm = document.getElementById("cmkm");
+      var cmhm = document.getElementById("cmhm");
+      var cmdam = document.getElementById("cmdam");
+      var cmdm = document.getElementById("cmdm");
+      var cmm = document.getElementById("cmm");
+      var cmmm = document.getElementById("cmmm");
+      
+      if (cmkm.style.display === "none") {
+        cmkm.style.display = "none";
+      } else {
+        cmkm.style.display = "none";
+      }
+      
+      if (cmhm.style.display === "none") {
+        cmhm.style.display = "none";
+      } else {
+        cmhm.style.display = "none";
+      }
+      
+      if (cmdam.style.display === "none") {
+        cmdam.style.display = "none";
+      } else {
+        cmdam.style.display = "none";
+      }
+      
+      if (cmdm.style.display === "none") {
+        cmdm.style.display = "none";
+      } else {
+        cmdm.style.display = "none";
+      }
+      
+      if (cmm.style.display === "none") {
+        cmm.style.display = "none";
+      } else {
+        cmm.style.display = "none";
+      }
+      
+      if (cmmm.style.display === "none") {
+        cmmm.style.display = "none";
+      } else {
+        cmmm.style.display = "none";
+      }
+      
+      var mmkm = document.getElementById("mmkm");
+      var mmhm = document.getElementById("mmhm");
+      var mmdam = document.getElementById("mmdam");
+      var mmdm = document.getElementById("mmdm");
+      var mmcm = document.getElementById("mmcm");
+      var mmm = document.getElementById("mmm");
+      
+      if (mmkm.style.display === "none") {
+        mmkm.style.display = "none";
+      } else {
+        mmkm.style.display = "none";
+      }
+      
+      if (mmhm.style.display === "none") {
+        mmhm.style.display = "none";
+      } else {
+        mmhm.style.display = "none";
+      }
+      
+      if (mmdam.style.display === "none") {
+        mmdam.style.display = "none";
+      } else {
+        mmdam.style.display = "none";
+      }
+      
+      if (mmdm.style.display === "none") {
+        mmdm.style.display = "none";
+      } else {
+        mmdm.style.display = "none";
+      }
+      
+      if (mmcm.style.display === "none") {
+        mmcm.style.display = "none";
+      } else {
+        mmcm.style.display = "none";
+      }
+      
+      if (mmm.style.display === "none") {
+        mmm.style.display = "none";
+      } else {
+        mmm.style.display = "none";
+      }
+      
+      document.getElementById('damkm').style.color = "purple";
+      document.getElementById('damhm').style.color = "purple";
+      document.getElementById('damm').style.color = "purple";
+      document.getElementById('damdm').style.color = "purple";
+      document.getElementById('damcm').style.color = "purple";
+      document.getElementById('dammm').style.color = "purple";
+    } 
+
+    function mydamkm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 100;
+      
+      document.getElementById('satuan1').innerHTML = "dam";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'km';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydamhm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 10;
+      
+      document.getElementById('satuan1').innerHTML = "dam";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'hm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydamm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let dua = x * 10;
+      
+      document.getElementById('satuan1').innerHTML = "dam";
+      document.getElementById('jml').innerHTML = dua;
+      document.getElementById('satuan2').innerHTML = 'm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydamdm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let tiga = x * 100;
+      
+      document.getElementById('satuan1').innerHTML = "dam";
+      document.getElementById('jml').innerHTML = tiga;
+      document.getElementById('satuan2').innerHTML = 'dm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydamcm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let empat = x * 1000;
+      
+      document.getElementById('satuan1').innerHTML = "dam";
+      document.getElementById('jml').innerHTML = empat;
+      document.getElementById('satuan2').innerHTML = 'cm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydammm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let lima = x * 10000;
+      
+      document.getElementById('satuan1').innerHTML = "dam";
+      document.getElementById('jml').innerHTML = lima;
+      document.getElementById('satuan2').innerHTML = 'mm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+
+
+    function mym() {
+      var kmhm = document.getElementById("kmhm");
+      var kmdam = document.getElementById("kmdam");
+      var kmm = document.getElementById("kmm");
+      var kmdm = document.getElementById("kmdm");
+      var kmcm = document.getElementById("kmcm");
+      var kmmm = document.getElementById("kmmm");
+      
+      if (kmhm.style.display === "none") {
+        kmhm.style.display = "none";
+      } else {
+        kmhm.style.display = "none";
+      }
+      
+      if (kmdam.style.display === "none") {
+        kmdam.style.display = "none";
+      } else {
+        kmdam.style.display = "none";
+      }
+      
+      if (kmm.style.display === "none") {
+        kmm.style.display = "none";
+      } else {
+        kmm.style.display = "none";
+      }
+      
+      if (kmdm.style.display === "none") {
+        kmdm.style.display = "none";
+      } else {
+        kmdm.style.display = "none";
+      }
+      
+      if (kmcm.style.display === "none") {
+        kmcm.style.display = "none";
+      } else {
+        kmcm.style.display = "none";
+      }
+      
+      if (kmmm.style.display === "none") {
+        kmmm.style.display = "none";
+      } else {
+        kmmm.style.display = "none";
+      }
+      
+      var hmkm = document.getElementById("hmkm");
+      var hmdam = document.getElementById("hmdam");
+      var hmm = document.getElementById("hmm");
+      var hmdm = document.getElementById("hmdm");
+      var hmcm = document.getElementById("hmcm");
+      var hmmm = document.getElementById("hmmm");
+      
+      if (hmkm.style.display === "none") {
+        hmkm.style.display = "none";
+      } else {
+        hmkm.style.display = "none";
+      }
+      
+      if (hmdam.style.display === "none") {
+        hmdam.style.display = "none";
+      } else {
+        hmdam.style.display = "none";
+      }
+      
+      if (hmm.style.display === "none") {
+        hmm.style.display = "none";
+      } else {
+        hmm.style.display = "none";
+      }
+      
+      if (hmdm.style.display === "none") {
+        hmdm.style.display = "none";
+      } else {
+        hmdm.style.display = "none";
+      }
+      
+      if (hmcm.style.display === "none") {
+        hmcm.style.display = "none";
+      } else {
+        hmcm.style.display = "none";
+      }
+      
+      if (hmmm.style.display === "none") {
+        hmmm.style.display = "none";
+      } else {
+        hmmm.style.display = "none";
+      }
+      
+      var damkm = document.getElementById("damkm");
+      var damhm = document.getElementById("damhm");
+      var damm = document.getElementById("damm");
+      var damdm = document.getElementById("damdm");
+      var damcm = document.getElementById("damcm");
+      var dammm = document.getElementById("dammm");
+      
+      if (damkm.style.display === "none") {
+        damkm.style.display = "none";
+      } else {
+        damkm.style.display = "none";
+      }
+      
+      if (damhm.style.display === "none") {
+        damhm.style.display = "none";
+      } else {
+        damhm.style.display = "none";
+      }
+      
+      if (damm.style.display === "none") {
+        damm.style.display = "none";
+      } else {
+        damm.style.display = "none";
+      }
+      
+      if (damdm.style.display === "none") {
+        damdm.style.display = "none";
+      } else {
+        damdm.style.display = "none";
+      }
+      
+      if (damcm.style.display === "none") {
+        damcm.style.display = "none";
+      } else {
+        damcm.style.display = "none";
+      }
+      
+      if (dammm.style.display === "none") {
+        dammm.style.display = "none";
+      } else {
+        dammm.style.display = "none";
+      }
+      
+      var mkm = document.getElementById("mkm");
+      var mhm = document.getElementById("mhm");
+      var mdam = document.getElementById("mdam");
+      var mdm = document.getElementById("mdm");
+      var mcm = document.getElementById("mcm");
+      var mml = document.getElementById("mml");
+      
+      if (mkm.style.display === "none") {
+        mkm.style.display = "block";
+      } else {
+        mkm.style.display = "block";
+      }
+      
+      if (mhm.style.display === "none") {
+        mhm.style.display = "block";
+      } else {
+        mhm.style.display = "block";
+      }
+      
+      if (mdam.style.display === "none") {
+        mdam.style.display = "block";
+      } else {
+        mdam.style.display = "block";
+      }
+      
+      if (mdm.style.display === "none") {
+        mdm.style.display = "block";
+      } else {
+        mdm.style.display = "block";
+      }
+      
+      if (mcm.style.display === "none") {
+        mcm.style.display = "block";
+      } else {
+        mcm.style.display = "block";
+      }
+      
+      if (mml.style.display === "none") {
+        mml.style.display = "block";
+      } else {
+        mml.style.display = "block";
+      }
+      
+      var dmkm = document.getElementById("dmkm");
+      var dmhm = document.getElementById("dmhm");
+      var dmdam = document.getElementById("dmdam");
+      var dmm = document.getElementById("dmm");
+      var dmcm = document.getElementById("dmcm");
+      var dmmm = document.getElementById("dmmm");
+      
+      if (dmkm.style.display === "none") {
+        dmkm.style.display = "none";
+      } else {
+        dmkm.style.display = "none";
+      }
+      
+      if (dmhm.style.display === "none") {
+        dmhm.style.display = "none";
+      } else {
+        dmhm.style.display = "none";
+      }
+      
+      if (dmdam.style.display === "none") {
+        dmdam.style.display = "none";
+      } else {
+        dmdam.style.display = "none";
+      }
+      
+      if (dmm.style.display === "none") {
+        dmm.style.display = "none";
+      } else {
+        dmm.style.display = "none";
+      }
+      
+      if (dmcm.style.display === "none") {
+        dmcm.style.display = "none";
+      } else {
+        dmcm.style.display = "none";
+      }
+      
+      if (dmmm.style.display === "none") {
+        dmmm.style.display = "none";
+      } else {
+        dmmm.style.display = "none";
+      }
+      
+      var cmkm = document.getElementById("cmkm");
+      var cmhm = document.getElementById("cmhm");
+      var cmdam = document.getElementById("cmdam");
+      var cmdm = document.getElementById("cmdm");
+      var cmm = document.getElementById("cmm");
+      var cmmm = document.getElementById("cmmm");
+      
+      if (cmkm.style.display === "none") {
+        cmkm.style.display = "none";
+      } else {
+        cmkm.style.display = "none";
+      }
+      
+      if (cmhm.style.display === "none") {
+        cmhm.style.display = "none";
+      } else {
+        cmhm.style.display = "none";
+      }
+      
+      if (cmdam.style.display === "none") {
+        cmdam.style.display = "none";
+      } else {
+        cmdam.style.display = "none";
+      }
+      
+      if (cmdm.style.display === "none") {
+        cmdm.style.display = "none";
+      } else {
+        cmdm.style.display = "none";
+      }
+      
+      if (cmm.style.display === "none") {
+        cmm.style.display = "none";
+      } else {
+        cmm.style.display = "none";
+      }
+      
+      if (cmmm.style.display === "none") {
+        cmmm.style.display = "none";
+      } else {
+        cmmm.style.display = "none";
+      }
+      
+      var mmkm = document.getElementById("mmkm");
+      var mmhm = document.getElementById("mmhm");
+      var mmdam = document.getElementById("mmdam");
+      var mmdm = document.getElementById("mmdm");
+      var mmcm = document.getElementById("mmcm");
+      var mmm = document.getElementById("mmm");
+      
+      if (mmkm.style.display === "none") {
+        mmkm.style.display = "none";
+      } else {
+        mmkm.style.display = "none";
+      }
+      
+      if (mmhm.style.display === "none") {
+        mmhm.style.display = "none";
+      } else {
+        mmhm.style.display = "none";
+      }
+      
+      if (mmdam.style.display === "none") {
+        mmdam.style.display = "none";
+      } else {
+        mmdam.style.display = "none";
+      }
+      
+      if (mmdm.style.display === "none") {
+        mmdm.style.display = "none";
+      } else {
+        mmdm.style.display = "none";
+      }
+      
+      if (mmcm.style.display === "none") {
+        mmcm.style.display = "none";
+      } else {
+        mmcm.style.display = "none";
+      }
+      
+      if (mmm.style.display === "none") {
+        mmm.style.display = "none";
+      } else {
+        mmm.style.display = "none";
+      }
+      
+      document.getElementById('mhm').style.color = "purple";
+      document.getElementById('mdam').style.color = "purple";
+      document.getElementById('mkm').style.color = "purple";
+      document.getElementById('mdm').style.color = "purple";
+      document.getElementById('mcm').style.color = "purple";
+      document.getElementById('mml').style.color = "purple";
+    } 
+    
+    function mymkm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 1000;
+      
+      document.getElementById('satuan1').innerHTML = "m";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'km';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymdam() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 10;
+      
+      document.getElementById('satuan1').innerHTML = "m";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'dam';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymhm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let dua = x / 100;
+      
+      document.getElementById('satuan1').innerHTML = "m";
+      document.getElementById('jml').innerHTML = dua;
+      document.getElementById('satuan2').innerHTML = 'hm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymdm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let tiga = x * 10;
+      
+      document.getElementById('satuan1').innerHTML = "m";
+      document.getElementById('jml').innerHTML = tiga;
+      document.getElementById('satuan2').innerHTML = 'dm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymcm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let empat = x * 100;
+      
+      document.getElementById('satuan1').innerHTML = "m";
+      document.getElementById('jml').innerHTML = empat;
+      document.getElementById('satuan2').innerHTML = 'cm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymml() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let lima = x * 1000;
+      
+      document.getElementById('satuan1').innerHTML = "m";
+      document.getElementById('jml').innerHTML = lima;
+      document.getElementById('satuan2').innerHTML = 'mm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+  
+function mydm() {
+      var kmhm = document.getElementById("kmhm");
+      var kmdam = document.getElementById("kmdam");
+      var kmm = document.getElementById("kmm");
+      var kmdm = document.getElementById("kmdm");
+      var kmcm = document.getElementById("kmcm");
+      var kmmm = document.getElementById("kmmm");
+      
+      if (kmhm.style.display === "none") {
+        kmhm.style.display = "none";
+      } else {
+        kmhm.style.display = "none";
+      }
+      
+      if (kmdam.style.display === "none") {
+        kmdam.style.display = "none";
+      } else {
+        kmdam.style.display = "none";
+      }
+      
+      if (kmm.style.display === "none") {
+        kmm.style.display = "none";
+      } else {
+        kmm.style.display = "none";
+      }
+      
+      if (kmdm.style.display === "none") {
+        kmdm.style.display = "none";
+      } else {
+        kmdm.style.display = "none";
+      }
+      
+      if (kmcm.style.display === "none") {
+        kmcm.style.display = "none";
+      } else {
+        kmcm.style.display = "none";
+      }
+      
+      if (kmmm.style.display === "none") {
+        kmmm.style.display = "none";
+      } else {
+        kmmm.style.display = "none";
+      }
+      
+      var hmkm = document.getElementById("hmkm");
+      var hmdam = document.getElementById("hmdam");
+      var hmm = document.getElementById("hmm");
+      var hmdm = document.getElementById("hmdm");
+      var hmcm = document.getElementById("hmcm");
+      var hmmm = document.getElementById("hmmm");
+      
+      if (hmkm.style.display === "none") {
+        hmkm.style.display = "none";
+      } else {
+        hmkm.style.display = "none";
+      }
+      
+      if (hmdam.style.display === "none") {
+        hmdam.style.display = "none";
+      } else {
+        hmdam.style.display = "none";
+      }
+      
+      if (hmm.style.display === "none") {
+        hmm.style.display = "none";
+      } else {
+        hmm.style.display = "none";
+      }
+      
+      if (hmdm.style.display === "none") {
+        hmdm.style.display = "none";
+      } else {
+        hmdm.style.display = "none";
+      }
+      
+      if (hmcm.style.display === "none") {
+        hmcm.style.display = "none";
+      } else {
+        hmcm.style.display = "none";
+      }
+      
+      if (hmmm.style.display === "none") {
+        hmmm.style.display = "none";
+      } else {
+        hmmm.style.display = "none";
+      }
+      
+      var damkm = document.getElementById("damkm");
+      var damhm = document.getElementById("damhm");
+      var damm = document.getElementById("damm");
+      var damdm = document.getElementById("damdm");
+      var damcm = document.getElementById("damcm");
+      var dammm = document.getElementById("dammm");
+      
+      if (damkm.style.display === "none") {
+        damkm.style.display = "none";
+      } else {
+        damkm.style.display = "none";
+      }
+      
+      if (damhm.style.display === "none") {
+        damhm.style.display = "none";
+      } else {
+        damhm.style.display = "none";
+      }
+      
+      if (damm.style.display === "none") {
+        damm.style.display = "none";
+      } else {
+        damm.style.display = "none";
+      }
+      
+      if (damdm.style.display === "none") {
+        damdm.style.display = "none";
+      } else {
+        damdm.style.display = "none";
+      }
+      
+      if (damcm.style.display === "none") {
+        damcm.style.display = "none";
+      } else {
+        damcm.style.display = "none";
+      }
+      
+      if (dammm.style.display === "none") {
+        dammm.style.display = "none";
+      } else {
+        dammm.style.display = "none";
+      }
+      
+      var mkm = document.getElementById("mkm");
+      var mhm = document.getElementById("mhm");
+      var mdam = document.getElementById("mdam");
+      var mdm = document.getElementById("mdm");
+      var mcm = document.getElementById("mcm");
+      var mml = document.getElementById("mml");
+      
+      if (mkm.style.display === "none") {
+        mkm.style.display = "none";
+      } else {
+        mkm.style.display = "none";
+      }
+      
+      if (mhm.style.display === "none") {
+        mhm.style.display = "none";
+      } else {
+        mhm.style.display = "none";
+      }
+      
+      if (mdam.style.display === "none") {
+        mdam.style.display = "none";
+      } else {
+        mdam.style.display = "none";
+      }
+      
+      if (mdm.style.display === "none") {
+        mdm.style.display = "none";
+      } else {
+        mdm.style.display = "none";
+      }
+      
+      if (mcm.style.display === "none") {
+        mcm.style.display = "none";
+      } else {
+        mcm.style.display = "none";
+      }
+      
+      if (mml.style.display === "none") {
+        mml.style.display = "none";
+      } else {
+        mml.style.display = "none";
+      }
+      
+      var dmkm = document.getElementById("dmkm");
+      var dmhm = document.getElementById("dmhm");
+      var dmdam = document.getElementById("dmdam");
+      var dmm = document.getElementById("dmm");
+      var dmcm = document.getElementById("dmcm");
+      var dmmm = document.getElementById("dmmm");
+      
+      if (dmkm.style.display === "none") {
+        dmkm.style.display = "block";
+      } else {
+        dmkm.style.display = "block";
+      }
+      
+      if (dmhm.style.display === "none") {
+        dmhm.style.display = "block";
+      } else {
+        dmhm.style.display = "block";
+      }
+      
+      if (dmdam.style.display === "none") {
+        dmdam.style.display = "block";
+      } else {
+        dmdam.style.display = "block";
+      }
+      
+      if (dmm.style.display === "none") {
+        dmm.style.display = "block";
+      } else {
+        dmm.style.display = "block";
+      }
+      
+      if (dmcm.style.display === "none") {
+        dmcm.style.display = "block";
+      } else {
+        dmcm.style.display = "block";
+      }
+      
+      if (dmmm.style.display === "none") {
+        dmmm.style.display = "block";
+      } else {
+        dmmm.style.display = "block";
+      }
+      
+      var cmkm = document.getElementById("cmkm");
+      var cmhm = document.getElementById("cmhm");
+      var cmdam = document.getElementById("cmdam");
+      var cmdm = document.getElementById("cmdm");
+      var cmm = document.getElementById("cmm");
+      var cmmm = document.getElementById("cmmm");
+      
+      if (cmkm.style.display === "none") {
+        cmkm.style.display = "none";
+      } else {
+        cmkm.style.display = "none";
+      }
+      
+      if (cmhm.style.display === "none") {
+        cmhm.style.display = "none";
+      } else {
+        cmhm.style.display = "none";
+      }
+      
+      if (cmdam.style.display === "none") {
+        cmdam.style.display = "none";
+      } else {
+        cmdam.style.display = "none";
+      }
+      
+      if (cmdm.style.display === "none") {
+        cmdm.style.display = "none";
+      } else {
+        cmdm.style.display = "none";
+      }
+      
+      if (cmm.style.display === "none") {
+        cmm.style.display = "none";
+      } else {
+        cmm.style.display = "none";
+      }
+      
+      if (cmmm.style.display === "none") {
+        cmmm.style.display = "none";
+      } else {
+        cmmm.style.display = "none";
+      }
+      
+      var mmkm = document.getElementById("mmkm");
+      var mmhm = document.getElementById("mmhm");
+      var mmdam = document.getElementById("mmdam");
+      var mmdm = document.getElementById("mmdm");
+      var mmcm = document.getElementById("mmcm");
+      var mmm = document.getElementById("mmm");
+      
+      if (mmkm.style.display === "none") {
+        mmkm.style.display = "none";
+      } else {
+        mmkm.style.display = "none";
+      }
+      
+      if (mmhm.style.display === "none") {
+        mmhm.style.display = "none";
+      } else {
+        mmhm.style.display = "none";
+      }
+      
+      if (mmdam.style.display === "none") {
+        mmdam.style.display = "none";
+      } else {
+        mmdam.style.display = "none";
+      }
+      
+      if (mmdm.style.display === "none") {
+        mmdm.style.display = "none";
+      } else {
+        mmdm.style.display = "none";
+      }
+      
+      if (mmcm.style.display === "none") {
+        mmcm.style.display = "none";
+      } else {
+        mmcm.style.display = "none";
+      }
+      
+      if (mmm.style.display === "none") {
+        mmm.style.display = "none";
+      } else {
+        mmm.style.display = "none";
+      }
+      
+      document.getElementById('dmhm').style.color = "purple";
+      document.getElementById('dmdam').style.color = "purple";
+      document.getElementById('dmm').style.color = "purple";
+      document.getElementById('dmkm').style.color = "purple";
+      document.getElementById('dmcm').style.color = "purple";
+      document.getElementById('dmmm').style.color = "purple";
+    } 
+
+    function mydmkm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 10000;
+      
+      document.getElementById('satuan1').innerHTML = "dm";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'km';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydmdam() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 100;
+      
+      document.getElementById('satuan1').innerHTML = "dm";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'dam';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let dua = x / 10;
+      
+      document.getElementById('satuan1').innerHTML = "dm";
+      document.getElementById('jml').innerHTML = dua;
+      document.getElementById('satuan2').innerHTML = 'm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydmhm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let tiga = x / 1000;
+      
+      document.getElementById('satuan1').innerHTML = "dm";
+      document.getElementById('jml').innerHTML = tiga;
+      document.getElementById('satuan2').innerHTML = 'hm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydmcm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let empat = x * 10;
+      
+      document.getElementById('satuan1').innerHTML = "dm";
+      document.getElementById('jml').innerHTML = empat;
+      document.getElementById('satuan2').innerHTML = 'cm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mydmmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let lima = x * 100;
+      
+      document.getElementById('satuan1').innerHTML = "dm";
+      document.getElementById('jml').innerHTML = lima;
+      document.getElementById('satuan2').innerHTML = 'mm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+
+
+    function mycm() {
+      var kmhm = document.getElementById("kmhm");
+      var kmdam = document.getElementById("kmdam");
+      var kmm = document.getElementById("kmm");
+      var kmdm = document.getElementById("kmdm");
+      var kmcm = document.getElementById("kmcm");
+      var kmmm = document.getElementById("kmmm");
+      
+      if (kmhm.style.display === "none") {
+        kmhm.style.display = "none";
+      } else {
+        kmhm.style.display = "none";
+      }
+      
+      if (kmdam.style.display === "none") {
+        kmdam.style.display = "none";
+      } else {
+        kmdam.style.display = "none";
+      }
+      
+      if (kmm.style.display === "none") {
+        kmm.style.display = "none";
+      } else {
+        kmm.style.display = "none";
+      }
+      
+      if (kmdm.style.display === "none") {
+        kmdm.style.display = "none";
+      } else {
+        kmdm.style.display = "none";
+      }
+      
+      if (kmcm.style.display === "none") {
+        kmcm.style.display = "none";
+      } else {
+        kmcm.style.display = "none";
+      }
+      
+      if (kmmm.style.display === "none") {
+        kmmm.style.display = "none";
+      } else {
+        kmmm.style.display = "none";
+      }
+      
+      var hmkm = document.getElementById("hmkm");
+      var hmdam = document.getElementById("hmdam");
+      var hmm = document.getElementById("hmm");
+      var hmdm = document.getElementById("hmdm");
+      var hmcm = document.getElementById("hmcm");
+      var hmmm = document.getElementById("hmmm");
+      
+      if (hmkm.style.display === "none") {
+        hmkm.style.display = "none";
+      } else {
+        hmkm.style.display = "none";
+      }
+      
+      if (hmdam.style.display === "none") {
+        hmdam.style.display = "none";
+      } else {
+        hmdam.style.display = "none";
+      }
+      
+      if (hmm.style.display === "none") {
+        hmm.style.display = "none";
+      } else {
+        hmm.style.display = "none";
+      }
+      
+      if (hmdm.style.display === "none") {
+        hmdm.style.display = "none";
+      } else {
+        hmdm.style.display = "none";
+      }
+      
+      if (hmcm.style.display === "none") {
+        hmcm.style.display = "none";
+      } else {
+        hmcm.style.display = "none";
+      }
+      
+      if (hmmm.style.display === "none") {
+        hmmm.style.display = "none";
+      } else {
+        hmmm.style.display = "none";
+      }
+      
+      var damkm = document.getElementById("damkm");
+      var damhm = document.getElementById("damhm");
+      var damm = document.getElementById("damm");
+      var damdm = document.getElementById("damdm");
+      var damcm = document.getElementById("damcm");
+      var dammm = document.getElementById("dammm");
+      
+      if (damkm.style.display === "none") {
+        damkm.style.display = "none";
+      } else {
+        damkm.style.display = "none";
+      }
+      
+      if (damhm.style.display === "none") {
+        damhm.style.display = "none";
+      } else {
+        damhm.style.display = "none";
+      }
+      
+      if (damm.style.display === "none") {
+        damm.style.display = "none";
+      } else {
+        damm.style.display = "none";
+      }
+      
+      if (damdm.style.display === "none") {
+        damdm.style.display = "none";
+      } else {
+        damdm.style.display = "none";
+      }
+      
+      if (damcm.style.display === "none") {
+        damcm.style.display = "none";
+      } else {
+        damcm.style.display = "none";
+      }
+      
+      if (dammm.style.display === "none") {
+        dammm.style.display = "none";
+      } else {
+        dammm.style.display = "none";
+      }
+      
+      var mkm = document.getElementById("mkm");
+      var mhm = document.getElementById("mhm");
+      var mdam = document.getElementById("mdam");
+      var mdm = document.getElementById("mdm");
+      var mcm = document.getElementById("mcm");
+      var mml = document.getElementById("mml");
+      
+      if (mkm.style.display === "none") {
+        mkm.style.display = "none";
+      } else {
+        mkm.style.display = "none";
+      }
+      
+      if (mhm.style.display === "none") {
+        mhm.style.display = "none";
+      } else {
+        mhm.style.display = "none";
+      }
+      
+      if (mdam.style.display === "none") {
+        mdam.style.display = "none";
+      } else {
+        mdam.style.display = "none";
+      }
+      
+      if (mdm.style.display === "none") {
+        mdm.style.display = "none";
+      } else {
+        mdm.style.display = "none";
+      }
+      
+      if (mcm.style.display === "none") {
+        mcm.style.display = "none";
+      } else {
+        mcm.style.display = "none";
+      }
+      
+      if (mml.style.display === "none") {
+        mml.style.display = "none";
+      } else {
+        mml.style.display = "none";
+      }
+      
+      var dmkm = document.getElementById("dmkm");
+      var dmhm = document.getElementById("dmhm");
+      var dmdam = document.getElementById("dmdam");
+      var dmm = document.getElementById("dmm");
+      var dmcm = document.getElementById("dmcm");
+      var dmmm = document.getElementById("dmmm");
+      
+      if (dmkm.style.display === "none") {
+        dmkm.style.display = "none";
+      } else {
+        dmkm.style.display = "none";
+      }
+      
+      if (dmhm.style.display === "none") {
+        dmhm.style.display = "none";
+      } else {
+        dmhm.style.display = "none";
+      }
+      
+      if (dmdam.style.display === "none") {
+        dmdam.style.display = "none";
+      } else {
+        dmdam.style.display = "none";
+      }
+      
+      if (dmm.style.display === "none") {
+        dmm.style.display = "none";
+      } else {
+        dmm.style.display = "none";
+      }
+      
+      if (dmcm.style.display === "none") {
+        dmcm.style.display = "none";
+      } else {
+        dmcm.style.display = "none";
+      }
+      
+      if (dmmm.style.display === "none") {
+        dmmm.style.display = "none";
+      } else {
+        dmmm.style.display = "none";
+      }
+      
+      var cmkm = document.getElementById("cmkm");
+      var cmhm = document.getElementById("cmhm");
+      var cmdam = document.getElementById("cmdam");
+      var cmdm = document.getElementById("cmdm");
+      var cmm = document.getElementById("cmm");
+      var cmmm = document.getElementById("cmmm");
+      
+      if (cmkm.style.display === "none") {
+        cmkm.style.display = "block";
+      } else {
+        cmkm.style.display = "block";
+      }
+      
+      if (cmhm.style.display === "none") {
+        cmhm.style.display = "block";
+      } else {
+        cmhm.style.display = "block";
+      }
+      
+      if (cmdam.style.display === "none") {
+        cmdam.style.display = "block";
+      } else {
+        cmdam.style.display = "block";
+      }
+      
+      if (cmdm.style.display === "none") {
+        cmdm.style.display = "block";
+      } else {
+        cmdm.style.display = "block";
+      }
+      
+      if (cmm.style.display === "none") {
+        cmm.style.display = "block";
+      } else {
+        cmm.style.display = "block";
+      }
+      
+      if (cmmm.style.display === "none") {
+        cmmm.style.display = "block";
+      } else {
+        cmmm.style.display = "block";
+      }
+      
+      var mmkm = document.getElementById("mmkm");
+      var mmhm = document.getElementById("mmhm");
+      var mmdam = document.getElementById("mmdam");
+      var mmm = document.getElementById("mmm");
+      var mmdm = document.getElementById("mmdm");
+      var mmcm = document.getElementById("mmcm");
+      
+      if (mmkm.style.display === "none") {
+        mmkm.style.display = "none";
+      } else {
+        mmkm.style.display = "none";
+      }
+      
+      if (mmhm.style.display === "none") {
+        mmhm.style.display = "none";
+      } else {
+        mmhm.style.display = "none";
+      }
+      
+      if (mmdam.style.display === "none") {
+        mmdam.style.display = "none";
+      } else {
+        mmdam.style.display = "none";
+      }
+      
+      if (mmdm.style.display === "none") {
+        mmdm.style.display = "none";
+      } else {
+        mmdm.style.display = "none";
+      }
+      
+      if (mmcm.style.display === "none") {
+        mmcm.style.display = "none";
+      } else {
+        mmcm.style.display = "none";
+      }
+      
+      if (mmm.style.display === "none") {
+        mmm.style.display = "none";
+      } else {
+        mmm.style.display = "none";
+      }
+      
+      document.getElementById('cmhm').style.color = "purple";
+      document.getElementById('cmdam').style.color = "purple";
+      document.getElementById('cmkm').style.color = "purple";
+      document.getElementById('cmdm').style.color = "purple";
+      document.getElementById('cmm').style.color = "purple";
+      document.getElementById('cmmm').style.color = "purple";
+    } 
+
+    function mycmkm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 100000;
+      
+      document.getElementById('satuan1').innerHTML = "cm";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'km';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mycmdam() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 1000;
+      
+      document.getElementById('satuan1').innerHTML = "cm";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'dam';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mycmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let dua = x / 100;
+      
+      document.getElementById('satuan1').innerHTML = "cm";
+      document.getElementById('jml').innerHTML = dua;
+      document.getElementById('satuan2').innerHTML = 'm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mycmdm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let tiga = x / 10;
+      
+      document.getElementById('satuan1').innerHTML = "cm";
+      document.getElementById('jml').innerHTML = tiga;
+      document.getElementById('satuan2').innerHTML = 'dm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mycmhm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let empat = x / 10000;
+      
+      document.getElementById('satuan1').innerHTML = "cm";
+      document.getElementById('jml').innerHTML = empat;
+      document.getElementById('satuan2').innerHTML = 'hm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mycmmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let lima = x * 10;
+      
+      document.getElementById('satuan1').innerHTML = "cm";
+      document.getElementById('jml').innerHTML = lima;
+      document.getElementById('satuan2').innerHTML = 'mm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+
+function mymm() {
+      var kmhm = document.getElementById("kmhm");
+      var kmdam = document.getElementById("kmdam");
+      var kmm = document.getElementById("kmm");
+      var kmdm = document.getElementById("kmdm");
+      var kmcm = document.getElementById("kmcm");
+      var kmmm = document.getElementById("kmmm");
+      
+      if (kmhm.style.display === "none") {
+        kmhm.style.display = "none";
+      } else {
+        kmhm.style.display = "none";
+      }
+      
+      if (kmdam.style.display === "none") {
+        kmdam.style.display = "none";
+      } else {
+        kmdam.style.display = "none";
+      }
+      
+      if (kmm.style.display === "none") {
+        kmm.style.display = "none";
+      } else {
+        kmm.style.display = "none";
+      }
+      
+      if (kmdm.style.display === "none") {
+        kmdm.style.display = "none";
+      } else {
+        kmdm.style.display = "none";
+      }
+      
+      if (kmcm.style.display === "none") {
+        kmcm.style.display = "none";
+      } else {
+        kmcm.style.display = "none";
+      }
+      
+      if (kmmm.style.display === "none") {
+        kmmm.style.display = "none";
+      } else {
+        kmmm.style.display = "none";
+      }
+      
+      var hmkm = document.getElementById("hmkm");
+      var hmdam = document.getElementById("hmdam");
+      var hmm = document.getElementById("hmm");
+      var hmdm = document.getElementById("hmdm");
+      var hmcm = document.getElementById("hmcm");
+      var hmmm = document.getElementById("hmmm");
+      
+      if (hmkm.style.display === "none") {
+        hmkm.style.display = "none";
+      } else {
+        hmkm.style.display = "none";
+      }
+      
+      if (hmdam.style.display === "none") {
+        hmdam.style.display = "none";
+      } else {
+        hmdam.style.display = "none";
+      }
+      
+      if (hmm.style.display === "none") {
+        hmm.style.display = "none";
+      } else {
+        hmm.style.display = "none";
+      }
+      
+      if (hmdm.style.display === "none") {
+        hmdm.style.display = "none";
+      } else {
+        hmdm.style.display = "none";
+      }
+      
+      if (hmcm.style.display === "none") {
+        hmcm.style.display = "none";
+      } else {
+        hmcm.style.display = "none";
+      }
+      
+      if (hmmm.style.display === "none") {
+        hmmm.style.display = "none";
+      } else {
+        hmmm.style.display = "none";
+      }
+      
+      var damkm = document.getElementById("damkm");
+      var damhm = document.getElementById("damhm");
+      var damm = document.getElementById("damm");
+      var damdm = document.getElementById("damdm");
+      var damcm = document.getElementById("damcm");
+      var dammm = document.getElementById("dammm");
+      
+      if (damkm.style.display === "none") {
+        damkm.style.display = "none";
+      } else {
+        damkm.style.display = "none";
+      }
+      
+      if (damhm.style.display === "none") {
+        damhm.style.display = "none";
+      } else {
+        damhm.style.display = "none";
+      }
+      
+      if (damm.style.display === "none") {
+        damm.style.display = "none";
+      } else {
+        damm.style.display = "none";
+      }
+      
+      if (damdm.style.display === "none") {
+        damdm.style.display = "none";
+      } else {
+        damdm.style.display = "none";
+      }
+      
+      if (damcm.style.display === "none") {
+        damcm.style.display = "none";
+      } else {
+        damcm.style.display = "none";
+      }
+      
+      if (dammm.style.display === "none") {
+        dammm.style.display = "none";
+      } else {
+        dammm.style.display = "none";
+      }
+      
+      var mkm = document.getElementById("mkm");
+      var mhm = document.getElementById("mhm");
+      var mdam = document.getElementById("mdam");
+      var mdm = document.getElementById("mdm");
+      var mcm = document.getElementById("mcm");
+      var mml = document.getElementById("mml");
+      
+      if (mkm.style.display === "none") {
+        mkm.style.display = "none";
+      } else {
+        mkm.style.display = "none";
+      }
+      
+      if (mhm.style.display === "none") {
+        mhm.style.display = "none";
+      } else {
+        mhm.style.display = "none";
+      }
+      
+      if (mdam.style.display === "none") {
+        mdam.style.display = "none";
+      } else {
+        mdam.style.display = "none";
+      }
+      
+      if (mdm.style.display === "none") {
+        mdm.style.display = "none";
+      } else {
+        mdm.style.display = "none";
+      }
+      
+      if (mcm.style.display === "none") {
+        mcm.style.display = "none";
+      } else {
+        mcm.style.display = "none";
+      }
+      
+      if (mml.style.display === "none") {
+        mml.style.display = "none";
+      } else {
+        mml.style.display = "none";
+      }
+      
+      var dmkm = document.getElementById("dmkm");
+      var dmhm = document.getElementById("dmhm");
+      var dmdam = document.getElementById("dmdam");
+      var dmm = document.getElementById("dmm");
+      var dmcm = document.getElementById("dmcm");
+      var dmmm = document.getElementById("dmmm");
+      
+      if (dmkm.style.display === "none") {
+        dmkm.style.display = "none";
+      } else {
+        dmkm.style.display = "none";
+      }
+      
+      if (dmhm.style.display === "none") {
+        dmhm.style.display = "none";
+      } else {
+        dmhm.style.display = "none";
+      }
+      
+      if (dmdam.style.display === "none") {
+        dmdam.style.display = "none";
+      } else {
+        dmdam.style.display = "none";
+      }
+      
+      if (dmm.style.display === "none") {
+        dmm.style.display = "none";
+      } else {
+        dmm.style.display = "none";
+      }
+      
+      if (dmcm.style.display === "none") {
+        dmcm.style.display = "none";
+      } else {
+        dmcm.style.display = "none";
+      }
+      
+      if (dmmm.style.display === "none") {
+        dmmm.style.display = "none";
+      } else {
+        dmmm.style.display = "none";
+      }
+      
+      var cmkm = document.getElementById("cmkm");
+      var cmhm = document.getElementById("cmhm");
+      var cmdam = document.getElementById("cmdam");
+      var cmdm = document.getElementById("cmdm");
+      var cmm = document.getElementById("cmm");
+      var cmmm = document.getElementById("cmmm");
+      
+      if (cmkm.style.display === "none") {
+        cmkm.style.display = "none";
+      } else {
+        cmkm.style.display = "none";
+      }
+      
+      if (cmhm.style.display === "none") {
+        cmhm.style.display = "none";
+      } else {
+        cmhm.style.display = "none";
+      }
+      
+      if (cmdam.style.display === "none") {
+        cmdam.style.display = "none";
+      } else {
+        cmdam.style.display = "none";
+      }
+      
+      if (cmdm.style.display === "none") {
+        cmdm.style.display = "none";
+      } else {
+        cmdm.style.display = "none";
+      }
+      
+      if (cmm.style.display === "none") {
+        cmm.style.display = "none";
+      } else {
+        cmm.style.display = "none";
+      }
+      
+      if (cmmm.style.display === "none") {
+        cmmm.style.display = "none";
+      } else {
+        cmmm.style.display = "none";
+      }
+      
+      var mmkm = document.getElementById("mmkm");
+      var mmhm = document.getElementById("mmhm");
+      var mmdam = document.getElementById("mmdam");
+      var mmdm = document.getElementById("mmdm");
+      var mmcm = document.getElementById("mmcm");
+      var mmm = document.getElementById("mmm");
+      
+      if (mmkm.style.display === "none") {
+        mmkm.style.display = "block";
+      } else {
+        mmkm.style.display = "block";
+      }
+      
+      if (mmhm.style.display === "none") {
+        mmhm.style.display = "block";
+      } else {
+        mmhm.style.display = "block";
+      }
+      
+      if (mmdam.style.display === "none") {
+        mmdam.style.display = "block";
+      } else {
+        mmdam.style.display = "block";
+      }
+      
+      if (mmdm.style.display === "none") {
+        mmdm.style.display = "block";
+      } else {
+        mmdm.style.display = "block";
+      }
+      
+      if (mmcm.style.display === "none") {
+        mmcm.style.display = "block";
+      } else {
+        mmcm.style.display = "block";
+      }
+      
+      if (mmm.style.display === "none") {
+        mmm.style.display = "block";
+      } else {
+        mmm.style.display = "block";
+      }
+      
+      document.getElementById('mmhm').style.color = "purple";
+      document.getElementById('mmdam').style.color = "purple";
+      document.getElementById('mmkm').style.color = "purple";
+      document.getElementById('mmdm').style.color = "purple";
+      document.getElementById('mmcm').style.color = "purple";
+      document.getElementById('mmm').style.color = "purple";
+    } 
+
+    function mymmkm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 1000000;
+      
+      document.getElementById('satuan1').innerHTML = "mm";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'km';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymmdam() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let satu = x / 10000;
+      
+      document.getElementById('satuan1').innerHTML = "mm";
+      document.getElementById('jml').innerHTML = satu;
+      document.getElementById('satuan2').innerHTML = 'dam';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymmm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let dua = x / 1000;
+      
+      document.getElementById('satuan1').innerHTML = "mm";
+      document.getElementById('jml').innerHTML = dua;
+      document.getElementById('satuan2').innerHTML = 'm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymmdm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let tiga = x / 100;
+      
+      document.getElementById('satuan1').innerHTML = "mm";
+      document.getElementById('jml').innerHTML = tiga;
+      document.getElementById('satuan2').innerHTML = 'dm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymmcm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let empat = x / 10;
+      
+      document.getElementById('satuan1').innerHTML = "mm";
+      document.getElementById('jml').innerHTML = empat;
+      document.getElementById('satuan2').innerHTML = 'cm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+    function mymmhm() {
+      mus.play();
+      document.getElementById("bar").style.animationPlayState = "running";
+    
+      let x = document.getElementById('angka1').innerHTML = getRndInteger(1, 100);
+    
+      let lima = x / 100000;
+      
+      document.getElementById('satuan1').innerHTML = "mm";
+      document.getElementById('jml').innerHTML = lima;
+      document.getElementById('satuan2').innerHTML = 'hm';
+      document.getElementById('off').style.opacity = "100%";
+      document.getElementById("jml").style.color = "white";
+
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    }
+
+
+    function myPausekmhm() {
+      document.getElementById("bar").style.animationPlayState = "paused";
+      document.getElementById("jml").style.color = "black";
+  }
+
+  </script>
+</body> 
+
+</html>
